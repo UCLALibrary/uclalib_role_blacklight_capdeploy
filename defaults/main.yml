@@ -1,0 +1,133 @@
+---
+
+capistrano_user: deploy
+
+capistrano_home_dir: "/home/{{ capistrano_user }}"
+
+capistrano_base: /opt
+
+capistrano_directories:
+  - "{{ capistrano_base }}/{{ project_name }}/shared/config"
+  - "{{ capistrano_base }}/{{ project_name }}/shared/log"
+  - "{{ capistrano_base }}/{{ project_name }}/shared/public/assets"
+  - "{{ capistrano_base }}/{{ project_name }}/shared/tmp/pids"
+  - "{{ capistrano_base }}/{{ project_name }}/releases"
+  - "{{ capistrano_base }}/derivatives"
+  - "{{ capistrano_base }}/uploads"
+  - "{{ capistrano_home_dir }}/.ssh"
+
+systemd_unit_file_dir: /etc/systemd/system
+
+### Should be defined in the play file or inventory file ###
+############################################################
+project_name: ""
+
+env_name: ""
+############################################################
+
+#### Defaults for dotenv ####
+# This is a template for what
+# should appear in a vars file
+############################################################
+rails_host_fqdn: ""
+
+rails_db_adapter: "mysql2"
+rails_db_pool: ""
+rails_db_host: ""
+rails_db_name: ""
+rails_db_user: ""
+rails_db_pass: ""
+
+project_default_admin_password: ""
+
+contact_email_addr: ""
+
+solr_index_url: ""
+
+redis_host: ""
+redis_port: ""
+
+sidekiq_num_threads: ""
+
+git_repo_url: ""
+
+git_repo_branch: ""
+
+# Defines the list of ssh public keys to add to the capistrano user's authorized key file
+# Each item in the list should be a user's public key or URL to the public key
+# For example:
+# ssh_pub_keys:
+#  - https://github.com/username1.keys
+#  - https://github.com/username2.keys
+#  - https://github.com/username3.keys
+ssh_pub_keys: []
+############################################################
+
+
+# SSL Defaults - these are used for local dev environments
+# This are overriden by variable definitions in host_vars
+############################################################
+enable_ssl: "yes"
+
+ssl_cert_base_path: "/etc/pki/tls"
+
+ssl_cert_file_path: "{{ ssl_cert_base_path }}/certs"
+
+ssl_key_file_path: "{{ ssl_cert_base_path }}/private"
+
+ssl_files:
+  self_signed: "yes"
+  crt: |
+    -----BEGIN CERTIFICATE-----
+    MIID1jCCAr4CCQDMKFe9ly+b4TANBgkqhkiG9w0BAQsFADCBrDELMAkGA1UEBhMC
+    VVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC0xvcyBBbmdlbGVzMS4w
+    LAYDVQQKEyVVbml2ZXJzaXR5IG9mIENhbGlmb3JuaWEsIExvcyBBbmdlbGVzMSkw
+    JwYDVQQLEyBVQ0xBIExpYnJhcnkgSW5mb3JtYXRpb24gU3lzdGVtczEXMBUGA1UE
+    AxMObG9jYWxkZXYubG9jYWwwHhcNMTcwOTE4MjAzMjU1WhcNMTcxMDE4MjAzMjU1
+    WjCBrDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcT
+    C0xvcyBBbmdlbGVzMS4wLAYDVQQKEyVVbml2ZXJzaXR5IG9mIENhbGlmb3JuaWEs
+    IExvcyBBbmdlbGVzMSkwJwYDVQQLEyBVQ0xBIExpYnJhcnkgSW5mb3JtYXRpb24g
+    U3lzdGVtczEXMBUGA1UEAxMObG9jYWxkZXYubG9jYWwwggEiMA0GCSqGSIb3DQEB
+    AQUAA4IBDwAwggEKAoIBAQDBF6FrV8hIm2axlirvAOk9Oy0TMbkvKRrK0DglYccc
+    Xxqu9KbD+V7q/7SS3y/7Ih4AQmyAe453K/fDZ9nyjaLgOKziqFJBwn6i8swuIXFR
+    pWs+g3udxrzO3ArjTwRC3NCqxlAKQfEw/iaaLlnlx3gigGhofzrmaoXMQvtQswOl
+    88BWCIjjJj/GEU3MkUmlSmsX9bR6/N3H43yCt7hvM+99i0sUVnjIK+VN4P3uW6+L
+    5mOU+TqywKaI66oaPsCuR0lZKRPsOWhszVUF86fcb5lr46DAsyj99y+GTFHNvwPT
+    hJajQe3/G/yeH8jwo/x4hqVG0Nuvv6jvFG1RhTvHGEI7AgMBAAEwDQYJKoZIhvcN
+    AQELBQADggEBAAQ4T0VOQ65HhV0cXaUClw5k4Jy/zMEwa8D5OIq48yFyclASPQNN
+    oG+iLva7t2+iKtqTTeGGbf2Z6z/YGPzP0UdQiOnfX4FUNp5RWDlgHHDUb0GdRMQI
+    +0OdFTbSX5SpfWAC4CzEdJZiAm5ifOtgmhlKYVxI1MV4SMWKu9wp+h3pbdHCznqS
+    rhpypS9OxvildHgYUkw/gIzXLDjjX4AK29mzdiZxjU//wbxkch2fJQEY9PyES2I4
+    yhCDe6nlxRAMLIez2RiI0nJ7Cu9ekaDZAFnbtpDjGz8iZ57SbZlJ/Xc8svVdViHc
+    kb+En24PtnCediAvW8BbgnSYvq3Sisel0gg=
+    -----END CERTIFICATE-----
+  key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEAwReha1fISJtmsZYq7wDpPTstEzG5LykaytA4JWHHHF8arvSm
+    w/le6v+0kt8v+yIeAEJsgHuOdyv3w2fZ8o2i4Dis4qhSQcJ+ovLMLiFxUaVrPoN7
+    nca8ztwK408EQtzQqsZQCkHxMP4mmi5Z5cd4IoBoaH865mqFzEL7ULMDpfPAVgiI
+    4yY/xhFNzJFJpUprF/W0evzdx+N8gre4bzPvfYtLFFZ4yCvlTeD97luvi+ZjlPk6
+    ssCmiOuqGj7ArkdJWSkT7DlobM1VBfOn3G+Za+OgwLMo/fcvhkxRzb8D04SWo0Ht
+    /xv8nh/I8KP8eIalRtDbr7+o7xRtUYU7xxhCOwIDAQABAoIBAFgA2hvfNTQKR4KW
+    i1jElIjIqKF/3wOke0aGIaC/8Ix4t+OXM05MIDuAcR8jQ230vbGmlGb2aRbdXh2b
+    /lQyw1Hn4rumtV6tMyQ2/mHj8g6hEsC6EiP1iOXKmdfBkpKaqyu6GI6kQTXwD03j
+    5Cr6f0FSPsOpgQG0+OgAeyPrgrUmGLb5PoFTcog/A9QVVosT8izOjXlMPBt5VTZK
+    aSUik+FjnszRTBd3Sw2n7bP6Qzff6VVO7DXSPbKGvPJR5lLwL8oAzgrJ8rJEykdo
+    3UlH8/o2tpO0WIvzKQ03pjAJl1Jm3FqhHOMPaVfK+RjakPaZWH/bjuSyD6BwBrdN
+    kPc6zYECgYEA68QqlKC69/458ggvQH8mmrXf0RJyCoOxjyE7v5wWP3o4HF/90lHZ
+    yZVnGXqkRp42StH6fM6+8FzaiyO1TvYI/4TD+QRS7yCg8CYkT4SxHplFG2Nw3kzO
+    t9xMVJ9ZDJ4UFrUUq7eFjvJEzOe22ZGyaNAP3Fl1JGKpD+0bgaqnDMECgYEA0ano
+    iPCpumiZKOp8s9uYh0bVM8/bUX+/3Jo8B8al3BElMKwIJViCImXNgXGDmRPrwYkC
+    /zpNQibaJOBZODhJPE/cNmm0Wz8iFCc0ALA3y/GLkHFVE6O2i35aBXaZq4MJnB+8
+    zCxQGhQ107GcPQ7nPJlp3oR4gXVxtLMiDCTCAfsCgYBbayEnqHtXFdjaJJpN4//Q
+    FZ3Hr+NQeGgtG7HTRm7KBlYjioUdPGe6ZpgnpQp153sd3/XE11XqVdbYBOyUxYoP
+    qidjM24FEx3UgLWrr8QOHVhSmmh1ikrNuDpQxcj9v34CoAx32R2MpBxRZ7fa/Ue0
+    pJjB1F470ZXEeygjS0yjAQKBgQDIVBsuNR1HUkf9c0dhptGvd7ugvNsmnPSaePgg
+    yeqSQgOR5N4HqPD2ouTf6LE/42vgyOQHMBK/wVWv5Hj7IbTAHuIfT5KXmNQcA3VJ
+    rxYxFIMwqUkL8eIqmLi0/aRI33SgKyb+wtxqfqMLuWm6YXIKUd95UIO/1pKlgH9o
+    sPp6XwKBgF8hmVYizLqJLWn6v08nC5f//GsLIIl63alaNzhAFW2UYRraHe046SWM
+    /Y/HO2SONIvSMun4TOg09I0w39bjG0Qp49Lbo6HzEnnj7CDoCcD+4/2a/rXoF2dj
+    GwAgg0rDBsH+meR5L6c+aalvzBazpiov3bCrknMYvgh56jVEdwIU
+    -----END RSA PRIVATE KEY-----
+
+############################################################

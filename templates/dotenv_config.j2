@@ -1,0 +1,31 @@
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# THIS IS AN ANSIBLE-MANAGED FILE. ALL CHANGES WILL BE OVERRIDDEN IF CONFIG
+# MANAGER IS RUN. MAKE SURE YOU REFLECT CHANGES IN THE ANSIBLE SCRIPTS IF
+# THEY SHOULD BE MADE PERMANENT.
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+SIDEKIQ_WORKERS={{ sidekiq_num_threads }}
+
+RAILS_HOST={{ rails_host_fqdn }}
+
+PROJECT_NAME={{ project_name }}
+
+DATABASE_ADAPTER={{ rails_db_adapter }}
+DATABASE_POOL={{ rails_db_pool }}
+DATABASE_HOST={{ rails_db_host }}
+DATABASE_NAME={{ rails_db_name }}
+DATABASE_USERNAME={{ rails_db_user }}
+DATABASE_PASSWORD={{ rails_db_pass }}
+
+ADMIN_PASSWORD={{ project_default_admin_password }}
+UPLOAD_PATH={{ capistrano_base }}/uploads
+CACHE_PATH={{ capistrano_base }}/uploads/cache
+WORKING_PATH={{ capistrano_base }}/uploads
+DERIVATIVES_PATH={{ capistrano_base }}/derivatives
+
+CONTACT_US_EMAIL={{ contact_email_addr }}
+
+SOLR_URL={{ solr_index_url }}
+
+REDIS_HOST={{ redis_host }}
+REDIS_PORT={{ redis_port }}

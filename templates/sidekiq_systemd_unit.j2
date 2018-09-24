@@ -1,0 +1,19 @@
+[Unit]
+Description=sidekiq
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WorkingDirectory={{ capistrano_base }}/{{ project_name }}/current
+ExecStart=/bin/bundle exec sidekiq -e production -C config/sidekiq.yml -L log/sidekiq.log
+User={{ capistrano_user }}
+Group={{ capistrano_user }}
+UMask=0002
+RestartSec=1
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=multi-user.target

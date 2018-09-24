@@ -1,0 +1,48 @@
+{% if enable_ssl == "yes" %}
+<VirtualHost *:443>
+{% else %}
+<VirtualHost *:80>
+{% endif %}
+
+  ServerName {{ rails_host_fqdn }}
+
+  ErrorLog /var/log/httpd/{{ project_name }}/error_log
+  CustomLog /var/log/httpd/{{ project_name }}/access_log combined
+
+  HostnameLookups Off
+
+  UseCanonicalName On
+
+  PassengerAppEnv production
+
+  DocumentRoot {{ capistrano_base }}/{{ project_name }}/current/public
+
+  AllowEncodedSlashes NoDecode
+
+  <IfModule mod_rewrite.c>
+    RewriteEngine On
+    ErrorDocument 503 /system/maintenance.html
+    # Return 503 error if the maintenance page exists.
+    RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+    RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+    RewriteRule ^.*$ - [L,R=503]
+  </IfModule>
+
+  <Directory {{ capistrano_base }}/{{ project_name }}/current/public>
+    Options -MultiViews
+    Require all granted
+  </Directory>
+
+{% if enable_ssl == "yes" %}
+  # Protocol, CipherSuite, and OCSP config in /etc/httpd/conf.d/ssl.conf
+  SSLEngine on
+  SSLCertificateFile      {{ ssl_cert_file_path }}/{{ rails_host_fqdn }}_cert.cer
+{% if ssl_files.self_signed == "no" %}
+  SSLCertificateChainFile {{ ssl_cert_file_path }}/{{ rails_host_fqdn }}_interm.cer
+{% endif %}
+  SSLCertificateKeyFile   {{ ssl_key_file_path }}/{{ rails_host_fqdn }}.key
+
+  CustomLog /var/log/httpd/{{ project_name }}/ssl_request_log   ssl_combined
+{% endif %}
+
+</VirtualHost>

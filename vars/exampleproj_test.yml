@@ -1,0 +1,31 @@
+---
+
+# project_name: exampleproj
+# env_name: test
+
+rails_host_fqdn: "blacklightapp.example.com"
+
+rails_db_adapter: "mysql2"
+rails_db_pool: "5"
+rails_db_host: "mysqldb.example.com"
+rails_db_name: "exampledb"
+rails_db_user: "exampleuser"
+rails_db_pass: "password"
+
+project_default_admin_password: "password"
+
+contact_email_addr: "test@example.com"
+
+solr_index_url: "http://solr.example.com/solr/examplecore"
+
+redis_host: "redis.example.com"
+redis_port: "6379"
+
+sidekiq_num_threads: "5"
+
+git_repo_url: "https://github.com/Example/exampleproject"
+
+git_repo_branch: "master"
+
+ssh_pub_keys:
+  - https://github.com/example.keys

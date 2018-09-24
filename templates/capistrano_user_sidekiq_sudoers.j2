@@ -1,0 +1,4 @@
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl start sidekiq
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl stop sidekiq
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl restart sidekiq
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl status sidekiq

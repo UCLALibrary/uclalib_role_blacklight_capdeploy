@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+	ServerName {{ rails_host_fqdn }}
+
+	ErrorLog /var/log/httpd/{{ project_name }}/error_log
+	CustomLog /var/log/httpd/{{ project_name }}/access_log combined
+
+	HostnameLookups Off
+
+	UseCanonicalName On
+
+	Redirect permanent / https://{{ rails_host_fqdn }}/
+</VirtualHost>

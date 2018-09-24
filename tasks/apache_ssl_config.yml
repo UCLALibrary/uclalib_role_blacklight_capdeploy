@@ -1,0 +1,48 @@
+---
+
+- name: Ensure SSL key and certificate directories exist
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ ssl_key_file_path }}"
+    - "{{ ssl_cert_file_path }}"
+
+- name: Put in place SSL key file
+  copy:
+    content: "{{ ssl_files.key }}"
+    dest: "{{ ssl_key_file_path }}/{{ rails_host_fqdn }}.key"
+    owner: root
+    group: root
+    mode: 0400
+  no_log: True
+
+- name: Put in place SSL certifiate file
+  copy:
+    content: "{{ ssl_files.crt }}"
+    dest: "{{ ssl_cert_file_path }}/{{ rails_host_fqdn }}_cert.cer"
+    owner: root
+    group: root
+    mode: 0644
+  no_log: True
+
+- name: Put in place SSL certificate chain file
+  copy:
+    content: "{{ ssl_files.interm }}"
+    dest: "{{ ssl_cert_file_path }}/{{ rails_host_fqdn }}_interm.cer"
+    owner: root
+    group: root
+    mode: 0644
+  when: ssl_files.self_signed == "no"
+  no_log: True
+
+- name: Put in place Apache SSL redirect virtual host configuration file
+  template:
+    src: apache_sslredirect_vhost.j2
+    dest: "/etc/httpd/vhosts.d/{{ project_name }}-redirect.httpd.conf"
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,4 @@
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl start httpd
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl stop httpd
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl restart httpd
+{{ capistrano_user }} ALL=(ALL) NOPASSWD: /bin/systemctl status httpd

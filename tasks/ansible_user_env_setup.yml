@@ -1,0 +1,65 @@
+---
+
+- name: Ensure ansible user is defined
+  set_fact:
+    ansible_username: "{{ ansible_user | default('ansible') }}"
+
+- name: Remove ansible user's existing known_hosts file
+  file:
+    path: "/home/{{ ansible_username }}/.ssh/known_hosts"
+    state: absent
+
+- name: Remove existing checked-out projects
+  file:
+    path: "/home/{{ ansible_username }}/{{ project_name }}"
+    state: absent
+
+- name: Determine if the ansible user has an ssh key pair
+  stat:
+    path: "/home/{{ ansible_username }}/.ssh/id_rsa.pub"
+  register: ansible_user_ssh_pubkey_path
+
+- name: Generate an ssh key pair for the ansible user
+  user:
+    name: "{{ ansible_username }}"
+    generate_ssh_key: yes
+    ssh_key_file: .ssh/id_rsa
+  when: ansible_user_ssh_pubkey_path.stat.exists == False
+
+- name: Grab a copy of the ansible user's ssh public key file
+  command: >
+    /bin/cat /home/{{ ansible_username }}/.ssh/id_rsa.pub
+  register: ansible_user_ssh_pubkey
+
+- name: Add ansible user's ssh public key to capistrano user's authorized_keys
+  authorized_key:
+    user: "{{ capistrano_user }}"
+    key: "{{ ansible_user_ssh_pubkey.stdout }}"
+
+- name: Obtain a fresh clone of the project's git repository
+  become_user: "{{ ansible_username }}"
+  git:
+    repo: "{{ git_repo_url }}"
+    dest: "/home/{{ ansible_username }}/{{ project_name }}"
+    version: "{{ git_repo_branch }}"
+
+- name: Create symbolic link in project for .env.production
+  file:
+    src: "{{ capistrano_base}}/{{ project_name }}/shared/.env.production"
+    dest: "/home/{{ ansible_user }}/{{ project_name }}/.env.production"
+    state: link
+  tags: [ 'never', 'development' ]
+
+- name: Create symbolic link in project for .env.development
+  file:
+    src: "{{ capistrano_base}}/{{ project_name }}/shared/.env.development"
+    dest: "/home/{{ ansible_user }}/{{ project_name }}/.env.development"
+    state: link
+  tags: [ 'never', 'development' ]
+
+- name: Create symbolic link in project for .env.test
+  file:
+    src: "{{ capistrano_base}}/{{ project_name }}/shared/.env.test"
+    dest: "/home/{{ ansible_user }}/{{ project_name }}/.env.test"
+    state: link
+  tags: [ 'never', 'development' ]

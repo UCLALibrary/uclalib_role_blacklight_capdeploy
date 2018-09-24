@@ -1,0 +1,36 @@
+---
+
+# This allows for making the {{ project_name }}_{{ env_name }}.yml vars file optional.
+# If this vars file is _not_ included in the role, the variables should be defined
+# elsehwere - e.g. in the playbook file
+- name: Determine if the project-specific vars file exists
+  local_action:
+    module: stat
+    path: "{{ role_path }}/vars/{{ project_name }}_{{ env_name }}.yml"
+  register: project_vars_file
+
+- name: Set-up project-specific environment variables
+  include_vars: "{{ project_name }}_{{ env_name }}.yml"
+  when: project_vars_file.stat.exists
+  no_log: True
+
+- name: Set-up the Capistrano environment
+  include_tasks: cap_setup.yml
+
+- name: Set-up the Sidekiq environment
+  include_tasks: sidekiq_setup.yml
+
+- name: Set-up the dotenv environment variables file
+  include_tasks: dotenv_setup.yml
+
+- name: Set-up the rails application secret key
+  include_tasks: rails_secretkey_setup.yml
+
+- name: Set-up the ansible user's environment to run the deploy
+  include_tasks: ansible_user_env_setup.yml
+
+- name: Set-up the Apache HTTPD virtual host file
+  include_tasks: apache_vhost_setup.yml
+
+- name: Execute the capistrano deploy process
+  include_tasks: capistrano_deploy.yml

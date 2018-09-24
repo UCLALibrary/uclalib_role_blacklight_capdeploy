@@ -1,0 +1,24 @@
+---
+
+- name: Put in place the dotenv configuration file for production
+  template:
+    src: dotenv_config.j2
+    dest: "{{ capistrano_base}}/{{ project_name }}/shared/.env.production"
+    owner: "{{ capistrano_user }}"
+    group: "{{ capistrano_user }}"
+
+- name: Put in place the dotenv configuration file for development
+  template:
+    src: dotenv_config.j2
+    dest: "{{ capistrano_base}}/{{ project_name }}/shared/.env.development"
+    owner: "{{ capistrano_user }}"
+    group: "{{ capistrano_user }}"
+  tags: [ 'never', 'development' ]
+
+- name: Put in place the dotenv configuration file for testing
+  template:
+    src: dotenv_test_config.j2
+    dest: "{{ capistrano_base}}/{{ project_name }}/shared/.env.test"
+    owner: "{{ capistrano_user }}"
+    group: "{{ capistrano_user }}"
+  tags: [ 'never', 'development' ]

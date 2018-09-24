@@ -1,0 +1,23 @@
+# Ansible role requirements for a Samvera/Hyrax deployment
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_rhel7repos.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_epel.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_uclalibrepo.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_samvera_basepackages.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_apache.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_pip.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_ruby.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_passenger.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_nodejs.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_yarn.git
+
+- src: git+https://github.com/UCLALibrary/uclalib_role_redis.git

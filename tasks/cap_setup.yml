@@ -1,0 +1,57 @@
+---
+
+- name: Create Capistrano system group
+  group:
+    name: "{{ capistrano_user }}"
+    state: present
+
+- name: Create Capistrano system user
+  user:
+    name: "{{ capistrano_user }}"
+    group: "{{ capistrano_user }}"
+    comment: "Capistrano User Account"
+    home: "{{ capistrano_home_dir }}"
+    shell: "/bin/bash"
+    createhome: yes
+    state: present
+
+- name: Create Capistrano directory structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ capistrano_user }}"
+    group: "{{ capistrano_user }}"
+  with_items: "{{ capistrano_directories }}"
+
+- name: Add ssh public keys to the Capistrano user account
+  authorized_key:
+    user: "{{ capistrano_user }}"
+    key: "{{ item }}"
+    state: present
+    exclusive: no
+  with_items: "{{ ssh_pub_keys }}"
+  when: ssh_pub_keys is defined
+
+- name: Put in place the SHELL definition in the capistrano user's crontab
+  cron:
+    user: "{{ capistrano_user }}"
+    env: yes
+    name: SHELL
+    value: "/bin/sh"
+    state: present
+
+- name: Put in place the PATH definition in the capistrano user's crontab
+  cron:
+    user: "{{ capistrano_user }}"
+    env: yes
+    name: PATH
+    value: "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+    insertafter: SHELL
+    state: present
+
+- name: Configure sudoers to allow capistrano user to restart Apache HTTPD
+  template:
+    src: capistrano_user_httpd_sudoers.j2
+    dest: /etc/sudoers.d/capistrano-user-httpd-restart
+    owner: root
+    group: root

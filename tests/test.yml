@@ -1,0 +1,6 @@
+---
+# This is a simple test, only used for syntax checking currently
+
+- hosts: all
+  roles:
+   - uclalib_role_blacklight_capdeploy

@@ -1,0 +1,33 @@
+---
+
+- name: Install required project gems
+  bundler:
+    state: present
+    chdir: "/home/{{ ansible_username }}/{{ project_name }}"
+
+- name: Execute capistrano deployment of project
+  become_user: "{{ ansible_username }}"
+  shell: >
+    BRANCH={{ git_repo_branch }} cap localhost deploy
+  args:
+    chdir: /home/{{ ansible_username }}/{{ project_name }}
+
+- name: Restart Apache HTTPD to reload passenger application
+  systemd:
+    name: httpd
+    state: restarted
+
+- name: Create test database for developers' box (optional)
+  become_user: "{{ ansible_username }}"
+  shell: >
+    RAILS_ENV=test bundle exec rake db:setup
+  args:
+    chdir: "/home/{{ ansible_username }}/{{ project_name }}/"
+  tags: [ 'never', 'development' ]
+
+- name: Clean-up ansible user project deploy directory
+  file:
+    path: "/home/{{ ansible_username }}/{{ project_name }}"
+    state: absent
+  tags:
+    - always
