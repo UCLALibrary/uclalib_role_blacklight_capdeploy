@@ -49,6 +49,12 @@ redis_port: ""
 
 sidekiq_num_threads: ""
 
+thumbnail_base_url: ""
+
+external_iiif_server_url: ""
+
+### End env vars
+
 git_repo_url: ""
 
 git_repo_branch: ""
