@@ -27,6 +27,15 @@
     group: root
     mode: 0644
 
+- name: Put in place Apache deflate_module configuration
+  file:
+    src: "deflate.conf"
+    dest: "/etc/httpd/conf.d/deflate.conf"
+    owner: root
+    group: root
+    mode: 0644
+  when: use_deflate_module == "yes"
+
 - name: Restart Apache HTTPD
   systemd:
     name: httpd

@@ -59,6 +59,9 @@ git_repo_url: ""
 
 git_repo_branch: ""
 
+# Define if we should use the deflate_module in Apache HTTPD config
+use_deflate_module: "yes"
+
 # Defines the list of ssh public keys to add to the capistrano user's authorized key file
 # Each item in the list should be a user's public key or URL to the public key
 # For example:
