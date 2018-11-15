@@ -18,6 +18,10 @@ capistrano_directories:
 
 systemd_unit_file_dir: /etc/systemd/system
 
+logrotate_files:
+  - "production.log"
+  - "sidekiq.log"
+
 ### Should be defined in the play file or inventory file ###
 ############################################################
 project_name: ""

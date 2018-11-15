@@ -1,0 +1,12 @@
+{% for logfile in logrotate_files %}
+{{ capistrano_base }}/{{ project_name }}/shared/log/{{ logfile }}
+{% endfor %}
+{
+        copytruncate
+        dateext
+        daily
+        rotate 6
+        compress
+        delaycompress
+        missingok
+}
