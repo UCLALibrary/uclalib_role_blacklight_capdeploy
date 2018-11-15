@@ -32,5 +32,8 @@
 - name: Set-up the Apache HTTPD virtual host file
   include_tasks: apache_vhost_setup.yml
 
+- name: Set-up the rails application logrotate configuration
+  include_tasks: logrotate_setup.yml 
+
 - name: Execute the capistrano deploy process
   include_tasks: capistrano_deploy.yml

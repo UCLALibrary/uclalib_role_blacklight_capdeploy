@@ -27,6 +27,7 @@ Variables the need to be defined in the **play file** or the **host inventory fi
 Variables with default values that **do not** need to be defined in the project vars file:
 * `capistrano_user` - defines the user account that will perform the code deploy - default is `deploy`
 * `capistrano_base` - defines the top-level directory where the project will be deployed - default is `/opt`
+* `logrotate_files` - defies the list of files to include in the rails application logrotate configuration file - defaults are `production.log` and `sidekiq.log`
 
 Variables that **do** need to be defined in the project vars file:
 * `rails_host_fqdn` - defines the fully qualified domain name of the rails app server
