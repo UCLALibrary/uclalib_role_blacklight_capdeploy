@@ -28,7 +28,7 @@
     mode: 0644
 
 - name: Put in place Apache deflate_module configuration
-  file:
+  copy:
     src: "deflate.conf"
     dest: "/etc/httpd/conf.d/deflate.conf"
     owner: root
