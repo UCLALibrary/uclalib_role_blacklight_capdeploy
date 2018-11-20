@@ -16,24 +16,40 @@
 
 - name: Set-up the Capistrano environment
   import_tasks: cap_setup.yml
+  tags:
+    - cap-setup
 
 - name: Set-up the Sidekiq environment
   import_tasks: sidekiq_setup.yml
+  tags:
+    - sidekiq-setup
 
 - name: Set-up the dotenv environment variables file
   import_tasks: dotenv_setup.yml
+  tags:
+    - dotenv-setup
 
 - name: Set-up the rails application secret key
   import_tasks: rails_secretkey_setup.yml
+  tags:
+    - rails-secretkey-setup
 
 - name: Set-up the ansible user's environment to run the deploy
   import_tasks: ansible_user_env_setup.yml
+  tags:
+    - ansible-user-env-setup
 
 - name: Set-up the Apache HTTPD virtual host file
   import_tasks: apache_vhost_setup.yml
+  tags:
+    - apache-vhost-setup
 
 - name: Set-up the rails application logrotate configuration
   import_tasks: logrotate_setup.yml
+  tags:
+    - logrotate-setup
 
 - name: Execute the capistrano deploy process
   import_tasks: capistrano_deploy.yml
+  tags:
+    - capistrano-deploy
