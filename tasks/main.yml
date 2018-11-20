@@ -15,25 +15,25 @@
   no_log: True
 
 - name: Set-up the Capistrano environment
-  include_tasks: cap_setup.yml
+  import_tasks: cap_setup.yml
 
 - name: Set-up the Sidekiq environment
-  include_tasks: sidekiq_setup.yml
+  import_tasks: sidekiq_setup.yml
 
 - name: Set-up the dotenv environment variables file
-  include_tasks: dotenv_setup.yml
+  import_tasks: dotenv_setup.yml
 
 - name: Set-up the rails application secret key
-  include_tasks: rails_secretkey_setup.yml
+  import_tasks: rails_secretkey_setup.yml
 
 - name: Set-up the ansible user's environment to run the deploy
-  include_tasks: ansible_user_env_setup.yml
+  import_tasks: ansible_user_env_setup.yml
 
 - name: Set-up the Apache HTTPD virtual host file
-  include_tasks: apache_vhost_setup.yml
+  import_tasks: apache_vhost_setup.yml
 
 - name: Set-up the rails application logrotate configuration
-  include_tasks: logrotate_setup.yml 
+  import_tasks: logrotate_setup.yml
 
 - name: Execute the capistrano deploy process
-  include_tasks: capistrano_deploy.yml
+  import_tasks: capistrano_deploy.yml
