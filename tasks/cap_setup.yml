@@ -31,6 +31,8 @@
     exclusive: no
   with_items: "{{ ssh_pub_keys }}"
   when: ssh_pub_keys is defined
+  tags:
+    - cap-user-ssh-pub-keys
 
 - name: Put in place the SHELL definition in the capistrano user's crontab
   cron:
