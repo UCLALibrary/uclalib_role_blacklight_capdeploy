@@ -57,6 +57,8 @@ thumbnail_base_url: ""
 
 external_iiif_server_url: ""
 
+google_tag_manager_id: "empty"
+
 ### End env vars
 
 git_repo_url: ""
