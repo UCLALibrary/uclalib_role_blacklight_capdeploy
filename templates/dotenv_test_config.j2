@@ -37,3 +37,7 @@ IIIF_URL={{ external_iiif_server_url }}
 {% if google_tag_manager_id != "empty" %}
 GOOGLE_TAG_MGR_ID={{ google_tag_manager_id }}
 {% endif %}
+
+{% if rollbar_api_token != "empty" %}
+ROLLBAR_ACCESS_TOKEN={{ rollbar_api_token }}
+{% endif %}

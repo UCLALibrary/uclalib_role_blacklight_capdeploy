@@ -46,6 +46,7 @@ Variables that **do** need to be defined in the project vars file:
 * `thumbnail_base_url` - defines the base URL path where Ursus should retrieve thumbnail image data (e.g. https://californica.example.com/)
 * `external_iiif_server_url` - defines the URL path where Ursus should retrieve IIIF server data (e.g. https://californica.example.edu/concern/works/)
 * `google_tag_manager_id` - (optional) - defines a Google Tag Manager key to be used within the server environment
+* `rollbar_api_token` - (optional) - defines the api token to use with the Rollbar error reporting tool
 * `git_repo_url` - defines the HTTP url to the project's git repository
 * `git_repo_branch` - defines the name of the project's git branch to deploy
 * `ssh_pub_keys` - defines the list of ssh public keys to install in the deploy user's authorized_keys file; this allows for other users to perform deployments
