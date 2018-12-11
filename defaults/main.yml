@@ -59,6 +59,8 @@ external_iiif_server_url: ""
 
 google_tag_manager_id: "empty"
 
+rollbar_api_token: "empty"
+
 ### End env vars
 
 git_repo_url: ""
