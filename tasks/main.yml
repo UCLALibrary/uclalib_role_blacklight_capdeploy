@@ -53,3 +53,8 @@
   import_tasks: capistrano_deploy.yml
   tags:
     - capistrano-deploy
+
+- name: Set-up robots.txt configuration
+  import_tasks: robotstxt_setup.yml
+  tags:
+    - robotstxt-setup

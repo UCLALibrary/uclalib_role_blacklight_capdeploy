@@ -1,0 +1,20 @@
+---
+
+- name: Remove existing/default robots.txt file
+  file:
+    path: "{{ capistrano_base }}/{{ project_name }}/current/public/robots.txt"
+    state: "absent"
+
+- name: Allow search engine crawling of this site
+  file:
+    src: "{{ capistrano_base }}/{{ project_name }}/current/public/robots_allow.txt"
+    path: "{{ capistrano_base }}/{{ project_name }}/current/public/robots.txt"
+    state: "link"
+  when: allow_web_crawl == "yes"
+
+- name: Disallow search engine crawling of this site
+  file:
+    src: "{{ capistrano_base }}/{{ project_name }}/current/public/robots_disallow.txt"
+    path: "{{ capistrano_base }}/{{ project_name }}/current/public/robots.txt"
+    state: "link"
+  when: allow_web_crawl == "no"
