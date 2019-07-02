@@ -49,6 +49,7 @@ Variables that **do** need to be defined in the project vars file:
 * `rollbar_api_token` - (optional) - defines the api token to use with the Rollbar error reporting tool
 * `git_repo_url` - defines the HTTP url to the project's git repository
 * `git_repo_branch` - defines the name of the project's git branch to deploy
+* `allow_web_crawl` - defines if search engines are allowed to crawl this site (yes or no)
 * `ssh_pub_keys` - defines the list of ssh public keys to install in the deploy user's authorized_keys file; this allows for other users to perform deployments
 * `use_deflate_module` - defines if we should use the deflate_module in the Apache HTTPD vhost configuration (default is `yes`)
 

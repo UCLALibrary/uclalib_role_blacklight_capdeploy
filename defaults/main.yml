@@ -67,6 +67,9 @@ git_repo_url: ""
 
 git_repo_branch: ""
 
+# Define if we should allow search engines to crawl this site (yes | no)
+allow_web_crawl: ""
+
 # Define if we should use the deflate_module in Apache HTTPD config
 use_deflate_module: "yes"
 
