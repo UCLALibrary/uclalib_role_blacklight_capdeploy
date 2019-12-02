@@ -34,6 +34,10 @@ THUMBNAIL_BASE_URL={{ thumbnail_base_url }}
 
 IIIF_URL={{ external_iiif_server_url }}
 
+{% if feature_flag != "empty" %}
+FEATURE_FLAG={{ feature_flag }}
+{% endif %}
+
 {% if google_tag_manager_id != "empty" %}
 GOOGLE_TAG_MGR_ID={{ google_tag_manager_id }}
 {% endif %}
