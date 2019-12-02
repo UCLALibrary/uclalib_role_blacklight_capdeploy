@@ -57,6 +57,8 @@ thumbnail_base_url: ""
 
 external_iiif_server_url: ""
 
+feature_flag: "empty"
+
 google_tag_manager_id: "empty"
 
 rollbar_api_token: "empty"
