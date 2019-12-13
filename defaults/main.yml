@@ -63,6 +63,15 @@ google_tag_manager_id: "empty"
 
 rollbar_api_token: "empty"
 
+recaptcha_site_key: ""
+recaptcha_secret_key: ""
+
+email_from_address: ""
+email_to_address: ""
+
+email_server_url: ""
+email_port: ""
+
 ### End env vars
 
 git_repo_url: ""

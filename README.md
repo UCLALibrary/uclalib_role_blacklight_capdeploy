@@ -48,6 +48,12 @@ Variables that **do** need to be defined in the project vars file:
 * `external_iiif_server_url` - defines the URL path where Ursus should retrieve IIIF server data (e.g. https://californica.example.edu/concern/works/)
 * `google_tag_manager_id` - (optional) - defines a Google Tag Manager key to be used within the server environment
 * `rollbar_api_token` - (optional) - defines the api token to use with the Rollbar error reporting tool
+* `recaptcha_site_key` - (optional) defines the site key to use with the recaptcha service
+* `recaptcha_secret_key` - (optional) defines the secret key to use with the recaptcha service
+* `email_from_address` - defines the email address used in conjunction with the contact form where email will be sent from
+* `email_to_address` - defines the email address used in conjunction with the contact form where email will be sent to
+* `email_server_url` - the url of the SMTP server email should be sent
+* `email_port` - the port number of the SMTP email server 
 * `git_repo_url` - defines the HTTP url to the project's git repository
 * `git_repo_branch` - defines the name of the project's git branch to deploy
 * `allow_web_crawl` - defines if search engines are allowed to crawl this site (yes or no)
