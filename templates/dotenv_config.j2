@@ -54,3 +54,16 @@ EMAIL_TO_ADDRESS={{ email_to_address }}
 
 EMAIL_SERVER_URL={{ email_server_url }}
 EMAIL_PORT={{ email_port }}
+
+{% if sinai_id_url is defined %}
+SINAIID_URL={{ sinai_id_url }}
+{% endif %}
+{% if sinai_id_key is defined %}
+SINAIID_UCLA_KEY={{ sinai_id_key }}
+{% endif %}
+{% if sinai_cipher is defined %}
+CIPHER_KEY={{ sinai_cipher }}
+{% endif %}
+{% if sinai_cookie_domain is defined %}
+DOMAIN={{ sinai_cookie_domain }}
+{% endif %}

@@ -59,6 +59,10 @@ Variables that **do** need to be defined in the project vars file:
 * `allow_web_crawl` - defines if search engines are allowed to crawl this site (yes or no)
 * `ssh_pub_keys` - defines the list of ssh public keys to install in the deploy user's authorized_keys file; this allows for other users to perform deployments
 * `use_deflate_module` - defines if we should use the deflate_module in the Apache HTTPD vhost configuration (default is `yes`)
+* `sinai_id_url` - (optional) Sinai Auth URI
+* `sinai_id_key` - (optional) Sinai Auth API Token
+* `sinai_cipher` - (optional) Sinai Auth Password
+* `sinai_cookie_domain` - (optional) Sinai Auth Cookie Domain
 
 An example vars file is available as a part of this role, named `exampleproj_test.yml`
 
