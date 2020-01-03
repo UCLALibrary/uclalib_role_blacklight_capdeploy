@@ -53,7 +53,7 @@ Variables that **do** need to be defined in the project vars file:
 * `email_from_address` - defines the email address used in conjunction with the contact form where email will be sent from
 * `email_to_address` - defines the email address used in conjunction with the contact form where email will be sent to
 * `email_server_url` - the url of the SMTP server email should be sent
-* `email_port` - the port number of the SMTP email server 
+* `email_port` - the port number of the SMTP email server
 * `git_repo_url` - defines the HTTP url to the project's git repository
 * `git_repo_branch` - defines the name of the project's git branch to deploy
 * `allow_web_crawl` - defines if search engines are allowed to crawl this site (yes or no)
