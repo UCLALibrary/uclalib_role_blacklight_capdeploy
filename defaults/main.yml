@@ -72,6 +72,14 @@ email_to_address: ""
 email_server_url: ""
 email_port: ""
 
+# Sinai Auth Variables, these are completely optional, and
+# should only be defined in the relevant host_vars. Provided
+# here for documentation only.
+# sinai_id_url: ""
+# sinai_id_key: ""
+# sinai_cipher: ""
+# sinai_cookie_domain: ""
+
 ### End env vars
 
 git_repo_url: ""

@@ -53,12 +53,16 @@ Variables that **do** need to be defined in the project vars file:
 * `email_from_address` - defines the email address used in conjunction with the contact form where email will be sent from
 * `email_to_address` - defines the email address used in conjunction with the contact form where email will be sent to
 * `email_server_url` - the url of the SMTP server email should be sent
-* `email_port` - the port number of the SMTP email server 
+* `email_port` - the port number of the SMTP email server
 * `git_repo_url` - defines the HTTP url to the project's git repository
 * `git_repo_branch` - defines the name of the project's git branch to deploy
 * `allow_web_crawl` - defines if search engines are allowed to crawl this site (yes or no)
 * `ssh_pub_keys` - defines the list of ssh public keys to install in the deploy user's authorized_keys file; this allows for other users to perform deployments
 * `use_deflate_module` - defines if we should use the deflate_module in the Apache HTTPD vhost configuration (default is `yes`)
+* `sinai_id_url` - (optional) Sinai Auth URI
+* `sinai_id_key` - (optional) Sinai Auth API Token
+* `sinai_cipher` - (optional) Sinai Auth Password
+* `sinai_cookie_domain` - (optional) Sinai Auth Cookie Domain
 
 An example vars file is available as a part of this role, named `exampleproj_test.yml`
 
