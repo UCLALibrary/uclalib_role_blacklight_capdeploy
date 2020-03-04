@@ -6,10 +6,10 @@
     state: "absent"
 
 - name: Allow search engine crawling of this site
-  file:
-    src: "{{ capistrano_base }}/{{ project_name }}/current/public/robots_allow.txt"
-    path: "{{ capistrano_base }}/{{ project_name }}/current/public/robots.txt"
-    state: "link"
+  template:
+    src: robots_txt.j2
+    dest: "{{ capistrano_base }}/{{ project_name }}/current/public/robots.txt"
+    mode: 0644
   when: allow_web_crawl == "yes"
 
 - name: Disallow search engine crawling of this site
