@@ -45,4 +45,8 @@
   CustomLog /var/log/httpd/{{ project_name }}/ssl_request_log   ssl_combined
 {% endif %}
 
+{% if redirect_match is defined %}
+  RedirectMatch {{ redirect_match }}
+{% endif %}
+
 </VirtualHost>
