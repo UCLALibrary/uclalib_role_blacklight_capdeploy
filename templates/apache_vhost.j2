@@ -5,6 +5,9 @@
 {% endif %}
 
   ServerName {{ rails_host_fqdn }}
+{% if rails_host_alias is defined %}
+  ServerAlias {{ rails_host_alias }}
+{% endif %}
 
   ErrorLog /var/log/httpd/{{ project_name }}/error_log
   CustomLog /var/log/httpd/{{ project_name }}/access_log combined
