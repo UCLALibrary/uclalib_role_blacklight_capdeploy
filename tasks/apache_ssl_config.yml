@@ -10,6 +10,7 @@
   with_items:
     - "{{ ssl_key_file_path }}"
     - "{{ ssl_cert_file_path }}"
+  when: certbot_certificates is not defined
 
 - name: Put in place SSL key file
   copy:
@@ -19,6 +20,7 @@
     group: root
     mode: 0400
   no_log: True
+  when: certbot_certificates is not defined
 
 - name: Put in place SSL certifiate file
   copy:
@@ -28,6 +30,7 @@
     group: root
     mode: 0644
   no_log: True
+  when: certbot_certificates is not defined
 
 - name: Put in place SSL certificate chain file
   copy:
@@ -36,7 +39,9 @@
     owner: root
     group: root
     mode: 0644
-  when: ssl_files.self_signed == "no"
+  when:
+    - ssl_files.self_signed == "no"
+    - certbot_certificates is not defined
   no_log: True
 
 - name: Put in place Apache SSL redirect virtual host configuration file

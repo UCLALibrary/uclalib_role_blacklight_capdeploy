@@ -169,4 +169,7 @@ ssl_files:
     GwAgg0rDBsH+meR5L6c+aalvzBazpiov3bCrknMYvgh56jVEdwIU
     -----END RSA PRIVATE KEY-----
 
+# from uclalib_role_certbot
+certbot_baseconfig_path: "/etc/letsencrypt"
+
 ############################################################
