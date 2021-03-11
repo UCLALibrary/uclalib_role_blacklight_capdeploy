@@ -39,15 +39,20 @@
 {% if enable_ssl == "yes" %}
   # Protocol, CipherSuite, and OCSP config in /etc/httpd/conf.d/ssl.conf
   SSLEngine on
-  SSLCertificateFile      {{ ssl_cert_file_path }}/{{ rails_host_fqdn }}_cert.cer
+{% if certbot_certificates is defined %}
+  SSLCertificateFile      {{ certbot_baseconfig_path }}/live/{{ (certbot_certificates|list)[0] }}/cert.pem
+  SSLCertificateChainFile {{ certbot_baseconfig_path }}/live/{{ (certbot_certificates|list)[0] }}/chain.pem
+  SSLCertificateKeyFile   {{ certbot_baseconfig_path }}/live/{{ (certbot_certificates|list)[0] }}/privkey.pem
+{% else %}
+SSLCertificateFile      {{ ssl_cert_file_path }}/{{ rails_host_fqdn }}_cert.cer
 {% if ssl_files.self_signed == "no" %}
   SSLCertificateChainFile {{ ssl_cert_file_path }}/{{ rails_host_fqdn }}_interm.cer
 {% endif %}
   SSLCertificateKeyFile   {{ ssl_key_file_path }}/{{ rails_host_fqdn }}.key
+{% endif %}
 
   CustomLog /var/log/httpd/{{ project_name }}/ssl_request_log   ssl_combined
 {% endif %}
-
 {% if redirect_match is defined %}
   RedirectMatch {{ redirect_match }}
 {% endif %}
