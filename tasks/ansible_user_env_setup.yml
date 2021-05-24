@@ -3,6 +3,8 @@
 - name: Ensure ansible user is defined
   set_fact:
     ansible_username: "{{ ansible_user | default('ansible') }}"
+  tags:
+    - always
 
 - name: Remove ansible user's existing known_hosts file
   file:
