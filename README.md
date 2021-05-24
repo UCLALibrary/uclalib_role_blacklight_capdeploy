@@ -139,3 +139,11 @@ To trigger the running of tasks that are only needed for a developers' box, supp
 For a production build, you would omit these arguments and the tasks that are intended only for the developers' box would be, by default, skipped.
 
 Running the build with the above `skip-tags` and `tags` arguments ensures that the project .env files for a developers' box are created, that the test database is created, and that the GitHub source is kept on the machine for the developer to use.
+
+Updating Environment
+-------------------------------
+
+This role can be used to update the environment:
+
+    --tags dotenv-setup --skip-tags always
+
