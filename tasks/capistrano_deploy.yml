@@ -20,6 +20,8 @@
   bundler:
     state: present
     chdir: "/home/{{ ansible_username }}/{{ project_name }}"
+  environment:
+    PATH: /usr/bin:/usr/local/bin
 
 - name: Execute capistrano deployment of project
   become_user: "{{ ansible_username }}"
