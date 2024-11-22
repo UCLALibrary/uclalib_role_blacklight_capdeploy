@@ -18,19 +18,20 @@
 
 - name: Determine if the ansible user has an ssh key pair
   stat:
-    path: "/home/{{ ansible_username }}/.ssh/id_rsa.pub"
+    path: "/home/{{ ansible_username }}/.ssh/id_ecdsa.pub"
   register: ansible_user_ssh_pubkey_path
 
 - name: Generate an ssh key pair for the ansible user
   user:
     name: "{{ ansible_username }}"
     generate_ssh_key: yes
-    ssh_key_file: .ssh/id_rsa
+    ssh_key_file: .ssh/id_ecdsa
+    type: ecdsa
   when: ansible_user_ssh_pubkey_path.stat.exists == False
 
 - name: Grab a copy of the ansible user's ssh public key file
   command: >
-    /bin/cat /home/{{ ansible_username }}/.ssh/id_rsa.pub
+    /bin/cat /home/{{ ansible_username }}/.ssh/id_ecdsa.pub
   register: ansible_user_ssh_pubkey
 
 - name: Add ansible user's ssh public key to capistrano user's authorized_keys
