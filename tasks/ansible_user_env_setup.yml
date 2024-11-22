@@ -26,7 +26,7 @@
     name: "{{ ansible_username }}"
     generate_ssh_key: yes
     ssh_key_file: .ssh/id_ecdsa
-    type: ecdsa
+    ssh_key_type: ecdsa
   when: ansible_user_ssh_pubkey_path.stat.exists == False
 
 - name: Grab a copy of the ansible user's ssh public key file
